@@ -1,17 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>bookshop</title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but bookshop doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="//img.yzcdn.cn/v2/image/yz_fc.ico">
+  <title>好书联盟</title>
+  <style>
+    div.van-tabs__line {
+      background-color: transparent;
+    }
+
+    div.van-tabs__content {
+      margin-top: 10px;
+    }
+
+    .van-tab.van-tab--active {
+      color: #FFF;
+      background-color: #f44;
+    }
+
+    div.van-tabs__wrap {
+      overflow: visible;
+    }
+
+    div.van-tabs__nav--line {
+      padding-bottom: 10px;
+    }
+
+    .van-tab.van-tab--active::before {
+      position: absolute;
+      bottom: -15px;
+      content: '';
+      left: 40%;
+      display: block;
+      height: 0;
+      width: 0;
+      border: 10px solid transparent;
+      border-top: 10px solid #f44;
+      z-index: 99;
+      /* border-top: #f40; */
+    }
+
+    div.van-search__action {
+      color: #f44
+    }
+
+    div.van-search--show-action {
+      background-color: rgb(242, 242, 242) !important;
+    }
+
+    div.van-search__content {
+      background-color: #fff;
+      border-radius: 5px;
+    }
+
+    i.van-icon.van-icon-success {
+      width: 18px;
+      height: 18px;
+      line-height: 18px;
+    }
+
+    .goods .van-checkbox {
+      display: flex;
+      justify-content: center;
+      float: left;
+      height: 100px;
+      width: 40px;
+      text-align: center;
+      line-height: 100px;
+      background: #fff;
+    }
+
+    .cart-bottom .van-checkbox {
+      float: left;
+      margin-right: 5px;
+    }
+
+    .cart-bottom .van-button {
+      height: 50px;
+      min-width: 80px;
+      margin-left: 10px;
+    }
+    .goods .van-button.van-button--danger{
+      height: 100px;
+    }
+    div.van-stepper{
+      height: 40px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+</body>
+
 </html>
