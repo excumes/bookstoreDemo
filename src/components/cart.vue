@@ -11,14 +11,14 @@
       <span class="edit" @click="showNumber = !showNumber">编辑</span>
     </div>
     <div class="goods-list">
-      <div class="goods" v-for="(item, i) in $store.state.cart" :key="i">
+      <div class="goods" v-for="(item, i) in cartInfo" :key="i">
         <van-swipe-cell>
           <van-checkbox
             v-model="item.selected"
             @click="checkboxChange(item.id,item.selected)"
             checked-color="#ff4444"
           ></van-checkbox>
-          <div class="goods-card">
+          <div class="goods-card">  
             <div class="goods-img-wrap">
               <img alt="商品图片" :src="item.img" class="goods-img" />
             </div>
@@ -75,7 +75,7 @@ export default {
       mycart: [],
       checked: false,
       ifDisabled: true,
-      showNumber: true
+      showNumber: true //展示编辑
 
     };
   },
@@ -83,7 +83,7 @@ export default {
     if (this.ifDisabled) {
       this.ifDisabled = false;
     }
-    console.log(this.$store.getters.getTotalPrice)
+    // console.log(this.$store.getters.getTotalPrice)
   },
   methods: {
     remove(id, index) {
@@ -92,15 +92,20 @@ export default {
       this.$store.commit("removeFormCart", id);
     },
     checkboxChange(id, selected) {
+        console.log(selected);
       // 商品id ，选择状态  、点击切换状态，更改store
       // selected是点击前的状态
       //   console.log(id+ '----'+ selected);
       selected = !selected;
+      console.log(id +'--'+selected);
       this.$store.commit("updateSelected", { id, selected });
     }
   },
-
-  watch: {}
+  computed:{
+    cartInfo(){
+      return this.$store.state.cart
+    }
+  }
 };
 </script>
 <style lang="less" scoped>

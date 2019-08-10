@@ -17,7 +17,6 @@ export default new Vuex.Store({
     addToCar(state, goods) {
       //把商品信息保存到入购物车
       var flag = true;
-      console.log(goods);
       state.cart.some(item => {
         if (item.id == goods.id) {
           // console.log(goods.count);
@@ -29,7 +28,9 @@ export default new Vuex.Store({
       if (flag) {
         // cart.push(goods)
         // Vue.set(state,'cart',cart);
-        state.cart.push(goods);
+        // Vue.set(state.cart,state.cart.length,goods);
+        // state.cart.splice(state.cart.length,0,goods);
+        state.cart.push(goods); //push 后 改变数组属性 不立马执行getters
       }
       // 缓存到localStorage
       console.log(state.cart);
@@ -47,30 +48,33 @@ export default new Vuex.Store({
       localStorage.setItem('cart', JSON.stringify(state.cart));
     },
     //更新选择状态
-    updateSelected(state, info) {
-      console.log('更新勾选状态')
-      console.log(info);
-      state.cart.some(item => {
-        if (item.id == info.id) {
-          item.selected = info.selected; //
+    updateSelected(state, {id , selected}) {
+      // console.log("点击了")
+      // info{id , selected }
+      state.cart.forEach((item,i) => {
+        if (item.id == id) {
+          // item.selected = info.selected; //
+          
+          // console.log(info.selected)
+          Vue.set(state.cart[i],'selected',selected);
         }
-        return true;
+        // return true;
       })
       console.log(state.cart);
-      let flag = true;
-      state.cart.forEach(item => {
-        // console.log(item.selected)
-        // console.log(item.selected);
-        if(item.selected == false){
-          flag = false;
-        }
-      })
-      // console.log(flag);
-      if(flag){
-        state.selectAll = true; //更新全选按钮
-      }else{
-        state.selectAll = false;
-      }
+      // let flag = true;
+      // state.cart.forEach(item => {
+      //   // console.log(item.selected)
+      //   // console.log(item.selected);
+      //   if(item.selected == false){
+      //     flag = false;
+      //   }
+      // })
+      // // console.log(flag);
+      // if(flag){
+      //   state.selectAll = true; //更新全选按钮
+      // }else{
+      //   state.selectAll = false;
+      // }
       // localStorage.setItem('selAll',state.selectAll);
       localStorage.setItem('cart', JSON.stringify(state.cart));
     },
@@ -108,7 +112,7 @@ export default new Vuex.Store({
         }
       })
       return TotPrice;
-    }
+    } 
 
   },
   actions: {

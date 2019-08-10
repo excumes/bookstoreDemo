@@ -62,11 +62,11 @@
         <van-tabs v-model="active">
           <van-tab :title="item.month+'月好书'" v-for="(item, i) in data.list" :key="i">
             <div class="goods-wrap">
-              <ul>
-                <li v-for="(book, i) in item.books" :key="i">
+              <ul style="height:540px">
+                <li v-for="(book, i) in item.books" :key="i" ref="bookul">
                   <a href="javascript:;">
                     <div class="img-box">
-                      <img :src="book.img" alt />
+                      <img :src="book.img" alt /> 
                     </div>
                     <div class="info">
                       <h3 class="title">{{book.title}}</h3>
@@ -247,11 +247,18 @@ export default {
     return {
       active: 0,
       data: data,
-      search: false,
-      value: "",
-      searchHistory: searchHistory,
-      hasHis: false
+      search: false, //搜索界面
+      value: "", //搜索input
+      searchHistory: searchHistory, 
+      hasHis: false,
+      ulheight: 0
     };
+  },
+  mounted(){
+      if(this.searchHistory.length != 0){
+          this.hasHis = true;
+      };
+     
   },
   watch: {
     //监听搜索历史
