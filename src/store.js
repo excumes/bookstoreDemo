@@ -4,13 +4,18 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 //获取购物车缓存数据
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
-// let allSel = JSON.parse(localStorage.getItem('selAll')) || false;
-// console.log(allSel);
+let selectAll = true; //
+//判断是否全选
+for(var item of cart){
+  if(!item.selected){
+    selectAll = false;
+  }
+}
 export default new Vuex.Store({
   state: {
     //购物车商品
     cart: cart,
-    selectAll: false,
+    selectAll: selectAll,
     allPrice :0
   },
   mutations: {
@@ -30,7 +35,7 @@ export default new Vuex.Store({
         // Vue.set(state,'cart',cart);
         // Vue.set(state.cart,state.cart.length,goods);
         // state.cart.splice(state.cart.length,0,goods);
-        state.cart.push(goods); //push 后 改变数组属性 不立马执行getters
+        state.cart.push(goods); 
       }
       // 缓存到localStorage
       console.log(state.cart);
@@ -49,7 +54,6 @@ export default new Vuex.Store({
     },
     //更新选择状态
     updateSelected(state, {id , selected}) {
-      // console.log("点击了")
       // info{id , selected }
       state.cart.forEach((item,i) => {
         if (item.id == id) {
@@ -61,20 +65,19 @@ export default new Vuex.Store({
         // return true;
       })
       console.log(state.cart);
-      // let flag = true;
-      // state.cart.forEach(item => {
-      //   // console.log(item.selected)
-      //   // console.log(item.selected);
-      //   if(item.selected == false){
-      //     flag = false;
-      //   }
-      // })
-      // // console.log(flag);
-      // if(flag){
-      //   state.selectAll = true; //更新全选按钮
-      // }else{
-      //   state.selectAll = false;
-      // }
+      //判断是不是 全部选中
+      let flag = true;
+      state.cart.forEach(item => {
+        if(item.selected == false){
+          flag = false;
+        }
+      })
+      // console.log(flag);
+      if(flag){
+        state.selectAll = true; //更新全选按钮
+      }else{
+        state.selectAll = false;
+      }
       // localStorage.setItem('selAll',state.selectAll);
       localStorage.setItem('cart', JSON.stringify(state.cart));
     },
@@ -105,7 +108,6 @@ export default new Vuex.Store({
     //获取勾选商品价格总价格
     getTotalPrice(state) {
       var TotPrice = 0;
-      console.log('执行了getTotalPrice')
       state.cart.forEach(item => {
         if (item.selected) {
           TotPrice += item.price * item.count;

@@ -8,7 +8,8 @@
       ></van-checkbox>
       <i class="icon-shop"></i>
       <span>好书联盟</span>
-      <span class="edit" @click="showNumber = !showNumber">编辑</span>
+      <span class="edit" @click="showNumber = !showNumber" v-show="showNumber">编辑</span>
+      <span class="edit" @click="showNumber = !showNumber" v-show="!showNumber">完成</span>
     </div>
     <div class="goods-list">
       <div class="goods" v-for="(item, i) in cartInfo" :key="i">
@@ -36,8 +37,10 @@
           </template>
         </van-swipe-cell>
       </div>
+    </div> 
+    <div class="recommend-goods">
+      <van-button type="default" size="large" class="continueshop" to="/home">继续购物<van-icon name="arrow"/></van-button>
     </div>
-    <div class="recommend-goods"></div>
     <div class="cart-bottom">
       <div class="left">
         <van-checkbox
@@ -75,7 +78,7 @@ export default {
       mycart: [],
       checked: false,
       ifDisabled: true,
-      showNumber: true //展示编辑
+      showNumber: true //展示编辑界面
 
     };
   },
@@ -92,12 +95,10 @@ export default {
       this.$store.commit("removeFormCart", id);
     },
     checkboxChange(id, selected) {
-        console.log(selected);
       // 商品id ，选择状态  、点击切换状态，更改store
       // selected是点击前的状态
       //   console.log(id+ '----'+ selected);
       selected = !selected;
-      console.log(id +'--'+selected);
       this.$store.commit("updateSelected", { id, selected });
     }
   },
@@ -243,6 +244,20 @@ export default {
     background-color: #f8f8f8;
     width: 100%;
     height: 100px;
+    display: flex;
+    justify-content: center;
+    .continueshop{
+      margin: 20px 15px;
+      font-size: 14px;
+      width: 340px;
+      .van-icon-arrow{
+        vertical-align: middle;
+        font-size: 12px;
+        color: #999;
+        margin-left: 3px;
+        margin-top: -2px;
+      }
+    }
   }
   .cart-bottom {
     max-width: 540px;

@@ -111,7 +111,8 @@ const data = {
           title:
             "《楚辞》2019全新版（爱美的人读《楚辞》，中华“美文学”的源头，直抵中国人的精神世界；特赠3份独家赠品",
           price: "108",
-          count:'1'
+          count:'1',
+          selected: false
         }
       ]
     },
@@ -125,7 +126,8 @@ const data = {
           title:
             "《漫威：绝密档案》（漫威官方正版授权，首部互动解谜游戏书；现在下单，才能最快收货）",
           price: "238",
-          count:1
+          count:1,
+          selected: false
         },
         {
           id: 3,
@@ -134,7 +136,8 @@ const data = {
           title:
             "《最后的访谈》「帆布袋赠品版」（六位文学大师生前的最后访谈，展现人类最优异大脑留给世界的文学遗嘱）",
           price: "132",
-          count:1
+          count:1,
+          selected: false
         },
         {
           id: 4,
@@ -143,7 +146,8 @@ const data = {
           title:
             "《双城记》2019权威译本版（狄更斯代表作；送人物关系表+珍藏明信片）",
           price: "49",
-          count:1
+          count:1,
+          selected: false
         }
       ]
     },
@@ -157,7 +161,8 @@ const data = {
           title:
             "《故宫里的博物学》系列全三册（来自故宫的百科图鉴，有趣有料的动物传奇）",
           price: "188",
-          count:1
+          count:1,
+          selected: false
         }
       ]
     },
@@ -171,7 +176,8 @@ const data = {
           title:
             "《故宫里的博物学》系列全三册（来自故宫的百科图鉴，有趣有料的动物传奇）",
           price: "188",
-          count:1
+          count:1,
+          selected: false
         }
       ]
     },
@@ -185,7 +191,8 @@ const data = {
           title:
             "《故宫里的博物学》系列全三册（来自故宫的百科图鉴，有趣有料的动物传奇）",
           price: "188",
-          count:1
+          count:1,
+          selected: false
         }
       ]
     },
@@ -199,7 +206,8 @@ const data = {
           title:
             "《故宫里的博物学》系列全三册（来自故宫的百科图鉴，有趣有料的动物传奇）",
           price: "188",
-          count:1
+          count:1,
+          selected: false
         }
       ]
     },
@@ -213,7 +221,8 @@ const data = {
           title:
             "《故宫里的博物学》系列全三册（来自故宫的百科图鉴，有趣有料的动物传奇）",
           price: "188",
-          count:1
+          count:1,
+          selected: false
         }
       ]
     },
@@ -227,7 +236,8 @@ const data = {
           title:
             "《故宫里的博物学》系列全三册（来自故宫的百科图鉴，有趣有料的动物传奇）",
           price: "188",
-          count:1
+          count:1,
+          selected: false
         }
       ]
     }
@@ -258,7 +268,6 @@ export default {
       if(this.searchHistory.length != 0){
           this.hasHis = true;
       };
-     
   },
   watch: {
     //监听搜索历史
@@ -283,9 +292,11 @@ export default {
     addToCart(book) {
         //调用store 中的addToCar
         //默认勾选
-        book.selected = false;
         this.$store.commit("addToCar",book);
-        this.$toast("加入购物车成功~");
+        this.$toast({
+          message: '加入购物车成功~',
+          duration : 1500
+        });
     }
   },
   components: {
